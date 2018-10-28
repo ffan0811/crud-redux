@@ -11,11 +11,16 @@ class AllPost extends Component {
 		return(
 			<div>
 				<h1>All Posts</h1>
-				{this.props.posts.map((post) => (
+				{this.props.posts.map((post) => ( console.log(post),
+					<div>
 					<div key={post.id}>
 						{post.editing ? <EditComponent post={post} key={post.id} /> : <Post key={post.id} post={post} />}
 					</div>
+					<button onClick={() => this.props.dispatch({type:'EDIT_POST', id:post.id})}>Edit</button>
+					</div>
 				))}
+
+
 			</div>
 		)
 	}
