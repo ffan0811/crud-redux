@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import PostForm from './PostForm';
-import AllPost from './AllPost';
+import { BrowserRouter, Route } from 'react-router-dom';
+import HomePage from './HomePage';
+import AllPostPage from './AllPostPage';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <PostForm/>
-        <AllPost/>
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <Route exact path="/" component={HomePage}/>
+          <Route exact path="/all" component={AllPostPage}/>
+        </div>
+      </BrowserRouter>
     );
   }
 }
