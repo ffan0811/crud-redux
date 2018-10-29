@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class Post extends Component {
+
 	render(){
 		return(
 			<div>
@@ -10,6 +11,7 @@ class Post extends Component {
 				<p>{this.props.postt.message}</p>
 				
 				<button onClick={() => this.props.dispatch({type:'DELETE_POST', id:this.props.postt.id})}>Delete</button>
+
 			</div>
 		)
 	}
