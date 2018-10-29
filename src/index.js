@@ -2,31 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import throttle from 'lodash/throttle';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/lib/integration/react';
 
-import { persistReducer, persistStore } from "redux-persist";
-import storage from "redux-persist/lib/storage";
 import rootReducer from './reducers/postReducer';
+import { loadState, saveState } from './localStorage';
 
-const persistConfig = {
-	key: 'root',
-	storage,
-};
+const persistedState = loadState();
 
-const pReducer = persistReducer(persistConfig, rootReducer);
+const store = createStore(
+	rootReducer,
+	persistedState
+);
 
-
-const store = createStore(pReducer);
-const persistor = persistStore(store)
-
+store.subscribe(throttle(() => {
+  saveState(
+    store.getState()
+  );
+}, 1000));
 
 ReactDOM.render(
 	<Provider store={store}>
-		<PersistGate loading={<div>loading</div>} persistor={persistor}>
-			<App />
-		</PersistGate>
+		<App />
 	</Provider>
 	, document.getElementById('root')
 );

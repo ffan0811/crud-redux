@@ -1,6 +1,7 @@
 const postReducer = (state = [], action) => {
 	switch(action.type) {
 		case 'ADD_POST':
+			console.log(state);
 			return state.concat([action.data]);
 		case 'DELETE_POST':
 			return state.filter((post)=> post.id !== action.id);

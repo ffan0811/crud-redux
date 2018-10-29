@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import { v4 } from 'node-uuid';
 
 class PostForm extends Component {
 
@@ -8,11 +9,12 @@ class PostForm extends Component {
 		const title = this.getTitle.value;
 		const message = this.getMessage.value;
 		const data = {
-			id: new Date(),
+			id: v4(),
 			title,
 			message,
 			editing: false
 		}
+		console.log(this.props);
 		this.props.dispatch({
 			type:'ADD_POST',
 			data
